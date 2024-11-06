@@ -1,0 +1,27 @@
+name: quick_net_test
+
+services:
+    ping_alt:
+      build:
+        dockerfile: ./Dockerfile
+      tty: true
+      stdin_open: true
+      networks:
+          host:
+          # replace this IP address with the gateway of choice
+          # note: ping may be blocked on some corporate networks,
+          # hence traceroute
+      command: traceroute 10.10.12.1
+
+networks:
+  host:
+    driver: macvlan
+    driver_opts:
+      # replace with the device you want to use 
+
+      # for ethernet
+      # nmcli device | grep ethernet
+      
+      # for wifi
+      # nmcli device | grep wifi
+      parent: wlp0s20f3
